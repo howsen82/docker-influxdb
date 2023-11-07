@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    volumes:
+      - $DOCKERDIR/appdata/influxdb2/config:/etc/influxdb2
+      - $DOCKERDIR/appdata/influxdb2/db:/var/lib/influxdb2
+    ports:
+      - 8086:8086
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
